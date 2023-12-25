@@ -1,10 +1,10 @@
 import React from "react";
 import imgIcon from "../images/hospital-icon.png";
-import Handles from "../Handles";
+import useHandles from "../useHandles";
 import "../../App.css";
 
 export default function Header() {
-  const { handleChangeValues, handleSend } = Handles();
+  const { handleChangeValues, handleSend } = useHandles();
 
   return <header className="header-container">
   <div>
