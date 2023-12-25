@@ -11,7 +11,10 @@ function App() {
 
   useEffect(() => {
     axios.get("http://localhost:3001").then((response) => {
-      setPatientsTable(response.data);
+      console.log(response.data);
+      setPatientsTable(response.data
+        .sort((a, b) => a.first_name.toUpperCase() > b.first_name.toUpperCase() ? 1 : -1)
+      );
     });
   }, []);
 

@@ -4,7 +4,7 @@ import useHandles from "../useHandles";
 import "../../App.css";
 
 export default function Header() {
-  const { handleChangeValues, handleSend } = useHandles();
+  const { handleRegister, handleSend } = useHandles();
 
   return <header className="header-container">
   <div>
@@ -18,14 +18,14 @@ export default function Header() {
       name="firstName"
       placeholder="First Name"
       className="register-input"
-      onChange={ handleChangeValues }
+      onChange={ handleRegister }
     />
     <input
       type="text"
       name="lastName"
       placeholder="Last Name"
       className="register-input"
-      onChange={ handleChangeValues }
+      onChange={ handleRegister }
     />
     <div>
       <input
@@ -35,13 +35,13 @@ export default function Header() {
         name="age"
         placeholder="Age"
         className="register-input"
-        onChange={ handleChangeValues }
+        onChange={ handleRegister }
         />
       <select
         className="register-input"
         placeholder="Gender"
         name="gender"
-        onChange={ handleChangeValues }
+        onChange={ handleRegister }
         >
         <option value="" disabled selected>Gender</option>
         <option value="Male">Male</option>

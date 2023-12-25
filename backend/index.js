@@ -43,6 +43,30 @@ app.post("/api/patients", (req, res) => {
   });
 });
 
+app.put("/api/edit/:id", (req, res) => {
+  const { first_name } = req.body;
+  const { last_name } = req.body;
+  const { age } = req.body;
+  const { gender }  = req.body;
+  const sqlQuery = `
+    UPDATE patients
+      SET
+        first_name = ?, last_name = ?, age = ?, gender = ?
+    WHERE id = ?
+  `;
+
+  db.query(sqlQuery,
+    [
+      first_name,
+      last_name,
+      age,
+      gender,
+    ], (err, result) => {
+    if(err) return res.send(err);
+    return res.status(200).json(result);
+  })
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
