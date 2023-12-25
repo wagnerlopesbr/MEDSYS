@@ -2,9 +2,19 @@ import React from 'react';
 import useHandles from '../useHandles';
 import '../../App.css';
 import DeletePopup from './DeletePopup';
+import EditPopup from './EditPopup';
 
 export default function Table({ patientsList }) {
-  const { popup, setPopup, showDeletePopup } = useHandles();
+  const {
+    deletePopup,
+    setDeletePopup,
+    showDeletePopup,
+    editPopup,
+    setEditPopup,
+    showEditPopup,
+    currentPatient,
+    setCurrentPatient,
+  } = useHandles();
 
   return <table border="2">
     <thead>
@@ -19,7 +29,10 @@ export default function Table({ patientsList }) {
     <tbody>
       { typeof patientsList !== "undefined" &&
         patientsList.map((patient) => (
-          <tr key={ patient.id }>
+          <tr
+            key={ patient.id }
+            id={ patient.id }
+          >
             <td>{ patient.first_name }</td>
             <td>{ patient.last_name }</td>
             <td style={{ textAlign: 'center' }}>{ patient.age }</td>
@@ -33,6 +46,11 @@ export default function Table({ patientsList }) {
             <td>
               <button
                 className="edit-btn"
+                onClick={ ()=> {
+                    setCurrentPatient(patient.id);
+                    showEditPopup(true);
+                  }
+                }
               >
                 Edit
               </button>
@@ -47,6 +65,7 @@ export default function Table({ patientsList }) {
         ))
       }
     </tbody>
-    { popup && <DeletePopup toggle={ setPopup } /> }
+    { deletePopup && <DeletePopup toggle={ setDeletePopup } /> }
+    { editPopup && <EditPopup toggle={ setEditPopup } currentPatient={ currentPatient } /> }
   </table>
 };

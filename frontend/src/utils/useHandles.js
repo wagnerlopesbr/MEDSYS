@@ -3,13 +3,19 @@ import axios from "axios";
 
 const useHandles = () => {
   const [values, setValues] = useState();
-  const [popup, setPopup] = useState(false);
+  const [deletePopup, setDeletePopup] = useState(false);
+  const [editPopup, setEditPopup] = useState(false);
+  const [currentPatient, setCurrentPatient] = useState(null);
 
   const showDeletePopup = (boolean) => {
-    setPopup(boolean);
+    setDeletePopup(boolean);
+  };
+
+  const showEditPopup = (boolean) => {
+    setEditPopup(boolean);
   };
   
-  const handleChangeValues = (value) => {
+  const handleRegister = (value) => {
     setValues(previousValues => ({
       ...previousValues,
       [value.target.name]: value.target.value,
@@ -27,7 +33,31 @@ const useHandles = () => {
     });
   };
 
-  return { values, popup, setPopup, showDeletePopup, handleChangeValues, handleSend };
+  const handleEdit = async (id) => {
+    axios.put(`http://localhost:3001/api/edit/${id}`, {
+      first_name: values.firstName,
+      last_name: values.lastName,
+      age: values.age,
+      gender: values.gender,
+    }).then((response) => {
+      console.log(response);
+    })
+  };
+
+  return {
+    values,
+    deletePopup,
+    setDeletePopup,
+    showDeletePopup,
+    editPopup,
+    setEditPopup,
+    showEditPopup,
+    handleRegister,
+    handleSend,
+    handleEdit,
+    currentPatient,
+    setCurrentPatient,
+  };
 };
 
 export default useHandles;
