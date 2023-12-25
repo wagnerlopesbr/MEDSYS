@@ -9,6 +9,7 @@ function App() {
   useHandles();
   const [patientsTable, setPatientsTable] = useState([]);
 
+  console.log('teste')
   useEffect(() => {
     axios.get("http://localhost:3001").then((response) => {
       setPatientsTable(response.data

@@ -43,22 +43,14 @@ const useHandles = () => {
       });
   };
 
-  const handleDelete = () => {
-    console.log("CURRENT 1: ", currentPatient);
-    if (currentPatient && currentPatient.id) {
-      console.log("CURRENT 2: ", currentPatient);
-      axios.delete(`http://localhost:3001/api/delete/${currentPatient.id}`)
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:3001/api/delete/${id}`)
       .then((response) => {
-        console.log("CURRENT 3: ", currentPatient);
         console.log(response.data);
       })
       .catch((error) => {
-        console.log("CURRENT 4: ", currentPatient);
         console.log(error);
       });
-    } else {
-      console.error("No patient selected");
-    }
   };
 
   return {

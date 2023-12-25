@@ -6,18 +6,14 @@ import useHandles from '../useHandles';
 
 export default function DeletePopup({ currentPatient, toggle }) {
   const { handleDelete } = useHandles();
-
-  const handleConfirmDelete = () => {
-    if (currentPatient && currentPatient.id) {
-      handleDelete(currentPatient);
-    } else {
-      console.error("No valid patient selected");
-    }
-  };
   
   return <div className="showPopup">
     <button
-      onClick={ handleConfirmDelete }
+      onClick={ () => {
+        handleDelete(currentPatient.id);
+        toggle(false);
+        }
+      }
     >
       <img src={ confirmIcon } width="24px" alt="logo" />
     </button>
