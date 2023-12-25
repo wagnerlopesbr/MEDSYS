@@ -1,8 +1,8 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
-const port = 3001;
 const mysql = require("mysql2");
+const app = express();
+const port = 3001;
 
 const db = mysql.createPool({
   host: "localhost",
@@ -17,54 +17,54 @@ app.use(express.json());
 app.get("/", (req, res) => {
   const sqlQuery = "SELECT * FROM patients";
   db.query(sqlQuery, (err, result) => {
-    if(err) return res.send(err);
+    if (err) {
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
     return res.status(200).json(result);
   });
 });
 
 app.post("/api/patients", (req, res) => {
-  console.log(req.body);
-  const { first_name } = req.body;
-  const { last_name } = req.body;
-  const { age } = req.body;
-  const { gender }  = req.body;
-  const sqlQuery = `INSERT INTO patients ( first_name, last_name, age, gender )
-    VALUES ( ?, ?, ?, ? )`;
-  
-  db.query(sqlQuery,
-    [
-      first_name,
-      last_name,
-      age,
-      gender
-    ], (err, result) => {
-    if(err) return res.send(err);
+  const { first_name, last_name, age, gender } = req.body;
+  const sqlQuery = `
+    INSERT INTO patients (first_name, last_name, age, gender)
+    VALUES (?, ?, ?, ?)`;
+
+  db.query(sqlQuery, [first_name, last_name, age, gender], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
     return res.status(200).json(result);
   });
 });
 
 app.put("/api/edit/:id", (req, res) => {
-  const { first_name } = req.body;
-  const { last_name } = req.body;
-  const { age } = req.body;
-  const { gender }  = req.body;
+  const { id } = req.params;
+  const { first_name, last_name, age, gender } = req.body;
   const sqlQuery = `
     UPDATE patients
-      SET
-        first_name = ?, last_name = ?, age = ?, gender = ?
+    SET first_name = ?, last_name = ?, age = ?, gender = ?
     WHERE id = ?
   `;
 
-  db.query(sqlQuery,
-    [
-      first_name,
-      last_name,
-      age,
-      gender,
-    ], (err, result) => {
-    if(err) return res.send(err);
+  db.query(sqlQuery, [first_name, last_name, age, gender, id], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
     return res.status(200).json(result);
-  })
+  });
+});
+
+app.delete("/api/delete/:id", (req, res) => {
+  const { id } = req.params;
+  const sqlQuery = "DELETE FROM patients WHERE id = ?";
+
+  db.query(sqlQuery, [id], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+    return res.status(200).json(result);
+  });
 });
 
 app.listen(port, () => {
