@@ -9,7 +9,9 @@ export default function DeletePopup({ toggle }) {
     <button>
       <img src={ confirmIcon } width="24px" alt="logo" />
     </button>
-    <button>
+    <button
+      onClick={ ()=> toggle(false) }
+    >
       <img src={ cancelIcon } width="24px" alt="logo" />
     </button>
   </div>

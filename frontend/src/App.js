@@ -1,12 +1,12 @@
 import './App.css';
-import Handles from "./utils/Handles";
+import useHandles from "./utils/useHandles";
 import Table from "./utils/components/Table";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from './utils/components/Header';
 
 function App() {
-  Handles();
+  useHandles();
   const [patientsTable, setPatientsTable] = useState([]);
 
   useEffect(() => {
