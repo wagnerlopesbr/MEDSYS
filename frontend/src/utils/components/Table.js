@@ -1,7 +1,15 @@
 import React from 'react';
+import { useState } from 'react';
 import '../../App.css';
+import DeletePopup from './DeletePopup';
 
 export default function Table({ patientsList }) {
+  const [popup, setPopup] = useState(false);
+
+  const showDeletePopup = (boolean) => {
+    setPopup(boolean);
+  };
+
   return <table border="2">
     <thead>
       <tr>
@@ -27,12 +35,22 @@ export default function Table({ patientsList }) {
               { patient.gender }
             </td>
             <td>
-              <button className="edit-btn">Edit</button>
-              <button className="delete-btn">Delete</button>
+              <button
+                className="edit-btn"
+              >
+                Edit
+              </button>
+              <button
+                className="delete-btn"
+                onClick={ ()=> showDeletePopup(false) }
+              >
+                Delete
+              </button>
             </td>
           </tr>
         ))
       }
     </tbody>
+    { popup && <DeletePopup toggle={ setPopup }/> }
   </table>
 };
