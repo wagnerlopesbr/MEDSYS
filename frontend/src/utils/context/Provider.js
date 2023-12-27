@@ -4,21 +4,18 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Provider = ({ children }) => {
-  const [patientsTable, setPatientsTable] = useState([]);
-  console.log(patientsTable);
+  const [apiData, setApiData] = useState([]);
 
-  const getPatients = () => {
-    axios.get("http://localhost:3001").then((response) => {
-      setPatientsTable(response.data
-        .sort((a, b) => a.first_name.toUpperCase() > b.first_name.toUpperCase() ? 1 : -1)
-      );
+  const getApiData = () => {
+    axios.get("http://localhost:3001/lists").then((response) => {
+      setApiData(response.data);
     }).catch((error) => {
       console.log("axios deu ruim", error);
     });
   };
 
   useEffect(() => {
-    getPatients();
+    getApiData();
   }, []);
 
   const {
@@ -40,8 +37,11 @@ const Provider = ({ children }) => {
 
   const value = {
     api: {
-      patientsTable,
-      setPatientsTable,
+      apiData: {
+        patients: apiData.patients,
+        doctors: apiData.doctors,
+      },
+      setApiData,
     },
     hooks: {
       testandoContext,

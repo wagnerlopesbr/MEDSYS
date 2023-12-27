@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import useHandles from '../useHandles';
 import '../../App.css';
 import DeletePopup from './DeletePopup';
 import EditPopup from './EditPopup';
 import GlobalContext from '../context/GlobalContext';
 
-export default function Table() {
-  const { hooks, api } = useContext(GlobalContext);
+export default function Table({ list }) {
+  const { hooks } = useContext(GlobalContext);
   
   const {
     deletePopup,
@@ -30,8 +29,8 @@ export default function Table() {
       </tr>
     </thead>
     <tbody>
-      { typeof api.patientsTable !== "undefined" &&
-        api.patientsTable.map((patient) => (
+      { typeof list !== "undefined" &&
+        list.map((patient) => (
           <tr
             key={ patient.id }
             id={ patient.id }
