@@ -5,7 +5,7 @@ const useHandles = () => {
   const [values, setValues] = useState();
   const [deletePopup, setDeletePopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
-  const [currentPatient, setCurrentPatient] = useState(null);
+  const [currentPatient, setCurrentPatient] = useState(1);
 
   const showDeletePopup = (boolean) => {
     setDeletePopup(boolean);
@@ -33,15 +33,24 @@ const useHandles = () => {
     });
   };
 
-  const handleEdit = async (id) => {
-    axios.put(`http://localhost:3001/api/edit/${id}`, {
-      first_name: values.firstName,
-      last_name: values.lastName,
-      age: values.age,
-      gender: values.gender,
-    }).then((response) => {
-      console.log(response);
-    })
+  const handleEdit = (id, editedPatient) => {
+    axios.put(`http://localhost:3001/api/edit/${id}`, editedPatient)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:3001/api/delete/${id}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return {
@@ -55,6 +64,7 @@ const useHandles = () => {
     handleRegister,
     handleSend,
     handleEdit,
+    handleDelete,
     currentPatient,
     setCurrentPatient,
   };

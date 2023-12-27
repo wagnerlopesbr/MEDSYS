@@ -47,8 +47,8 @@ export default function Table({ patientsList }) {
               <button
                 className="edit-btn"
                 onClick={ ()=> {
-                    setCurrentPatient(patient.id);
-                    showEditPopup(true);
+                  setCurrentPatient(patient);
+                  showEditPopup(true);
                   }
                 }
               >
@@ -56,7 +56,11 @@ export default function Table({ patientsList }) {
               </button>
               <button
                 className="delete-btn"
-                onClick={ ()=> showDeletePopup(true) }
+                onClick={ ()=> {
+                  setCurrentPatient(patient);
+                  showDeletePopup(true);
+                  }
+                }
               >
                 Delete
               </button>
@@ -65,7 +69,7 @@ export default function Table({ patientsList }) {
         ))
       }
     </tbody>
-    { deletePopup && <DeletePopup toggle={ setDeletePopup } /> }
+    { deletePopup && <DeletePopup toggle={ setDeletePopup } currentPatient={ currentPatient }/> }
     { editPopup && <EditPopup toggle={ setEditPopup } currentPatient={ currentPatient } /> }
   </table>
 };

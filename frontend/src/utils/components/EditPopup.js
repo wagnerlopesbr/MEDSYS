@@ -1,33 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import confirmIcon from "../images/confirm.png";
 import cancelIcon from "../images/cancel.png";
 import '../../App.css';
 import useHandles from '../useHandles';
 
 export default function EditPopup({ currentPatient, toggle }) {
-  const { handleRegister, handleEdit } = useHandles();
+  const { handleEdit } = useHandles();
+  const [editedPatient, setEditedPatient] = useState({
+    first_name: currentPatient.first_name,
+    last_name: currentPatient.last_name,
+    age: currentPatient.age,
+    gender: currentPatient.gender,
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setEditedPatient((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return <div className="showPopup">
-    { currentPatient &&
+    { currentPatient && (
       <div key={ currentPatient.id }>
         <input
           type="text"
-          onChange={ handleRegister }
-          placeholder={ currentPatient.first_name }
+          name="first_name"
+          onChange={ handleInputChange }
+          placeholder={ editedPatient.first_name }
         />
         <input
           type="text"
-          onChange={ handleRegister }
-          placeholder={ currentPatient.last_name }
+          name="last_name"
+          onChange={ handleInputChange }
+          placeholder={ editedPatient.last_name }
         />
         <input
           type="number"
-          onChange={ handleRegister }
-          placeholder={ currentPatient.age }
+          name="age"
+          onChange={ handleInputChange }
+          placeholder={ editedPatient.age }
         />
         <select
           type="text"
-          onChange={ handleRegister }
-          placeholder={ currentPatient.gender }
+          name="gender"
+          onChange={ handleInputChange }
+          placeholder={ editedPatient.gender }
         >
           <option value="Male" style={{
               textAlign: 'center',
@@ -47,7 +66,7 @@ export default function EditPopup({ currentPatient, toggle }) {
         <button
           className="confirm-btn"
           onClick={ ()=> {
-              handleEdit(currentPatient.id);
+              handleEdit(currentPatient.id, editedPatient);
               toggle(false);
             }
           }
@@ -61,6 +80,6 @@ export default function EditPopup({ currentPatient, toggle }) {
           <img src={ cancelIcon } width="24px" alt="logo" />
         </button>
       </div>
-    }
+    )}
   </div>
 };
