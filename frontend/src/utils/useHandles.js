@@ -5,7 +5,7 @@ const useHandles = () => {
   const [values, setValues] = useState();
   const [deletePopup, setDeletePopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
-  const [currentPatient, setCurrentPatient] = useState(1);
+  const [currentPatient, setCurrentPatient] = useState();
 
   const showDeletePopup = (boolean) => {
     setDeletePopup(boolean);
@@ -53,7 +53,12 @@ const useHandles = () => {
       });
   };
 
+  const testandoContext = () => {
+    return "funcionou!";
+  };
+
   return {
+    testandoContext,
     values,
     deletePopup,
     setDeletePopup,

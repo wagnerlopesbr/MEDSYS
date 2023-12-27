@@ -1,31 +1,19 @@
 import './App.css';
-import useHandles from "./utils/useHandles";
 import Table from "./utils/components/Table";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from './utils/components/Header';
+import Provider from './utils/context/Provider';
 
 function App() {
-  useHandles();
-  const [patientsTable, setPatientsTable] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:3001").then((response) => {
-      setPatientsTable(response.data
-        .sort((a, b) => a.first_name.toUpperCase() > b.first_name.toUpperCase() ? 1 : -1)
-      );
-    });
-  }, []);
-
   return (
-    <body>
+    <Provider>
       <Header />
       <div className="table-container">
-        <Table
-          patientsList={ patientsTable }
-        />
+        <Table />
+        <Table />
       </div>
-    </body>
+    </Provider>
   );
 }
 
