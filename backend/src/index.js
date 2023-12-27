@@ -3,16 +3,13 @@ const cors = require("cors");
 const mysql = require("mysql2");
 const app = express();
 const port = 3001;
-
-const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "1234",
-  database: "hospital_db",
-});
+const lists = require("./routes/lists");
+const db = require("./db/connection");
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/lists", lists);
 
 app.get("/", (req, res) => {
   const sqlQuery = "SELECT * FROM patients";
