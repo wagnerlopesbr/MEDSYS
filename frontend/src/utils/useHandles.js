@@ -1,11 +1,36 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const useHandles = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState();
   const [deletePopup, setDeletePopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
   const [currentPatient, setCurrentPatient] = useState();
+  const [logged, setLogged] = useState(false);
+  
+  console.log(logged);
+  const handleLogin = async (user) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/`);
+      const { data } = response;
+      const userIndex = data.users.find(
+        userData => userData.user === user.user && userData.password === user.password
+        );
+        if (userIndex) {
+          console.log("Usuário encontrado no índice: ", userIndex);
+          setLogged(true);
+          console.log(logged);
+          navigate("/main");
+        } else {
+          console.log(logged);
+          console.log("Usuário não encontrado");
+        }
+    } catch (error) {
+      console.log("Login error: ", error);
+    }
+  };
 
   const showDeletePopup = (boolean) => {
     setDeletePopup(boolean);
@@ -53,12 +78,10 @@ const useHandles = () => {
       });
   };
 
-  const testandoContext = () => {
-    return "funcionou!";
-  };
-
   return {
-    testandoContext,
+    handleLogin,
+    logged,
+    setLogged,
     values,
     deletePopup,
     setDeletePopup,

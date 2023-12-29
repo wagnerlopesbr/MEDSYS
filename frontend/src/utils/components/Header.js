@@ -11,7 +11,7 @@ export default function Header() {
     <img src={ imgIcon } width="160px" alt="logo" />
   </div>
   <div className="register-container">
-    <h1>Hospital</h1>
+    <h1>MEDSYS</h1>
     <h2 className="h2-header">patients register</h2>     
     <input
       type="text"
