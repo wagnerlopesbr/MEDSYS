@@ -5,27 +5,50 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   const jsonObj = {};
-  const sqlQueryPatients = `
-  SELECT * FROM patients;
-  `;
-  const sqlQueryDoctors = `
-  SELECT * FROM doctors;
-  `;
+  const sqlQueryUsers = `SELECT * FROM users;`;
+  const sqlQueryPatients = `SELECT * FROM patients;`;
+  const sqlQueryDoctors = `SELECT * FROM doctors;`;
 
-  db.query(sqlQueryPatients, (err, result) => {
-    if (err) {
-      return res.status(500).json({ error: "Internal Server Error" });
+  const getUsers = new Promise((resolve, reject) => {
+    try {
+      db.query(sqlQueryUsers, (_err, result) => {
+        jsonObj.users = result;
+        resolve();
+      });
+    } catch (err) {
+      return res.status(500).json({ err: "Internal Server Error" })
     }
-    jsonObj.patients = result;
   });
 
-  db.query(sqlQueryDoctors, (err, result) => {
-    if (err) {
-      return res.status(500).json({ error: "Internal Server Error" });
+  const getPatients = new Promise((resolve, reject) => {
+    try {
+      db.query(sqlQueryPatients, (_err, result) => {
+        jsonObj.patients = result;
+        resolve();
+      });
+    } catch (err) {
+      return res.status(500).json({ err: "Internal Server Error" })
     }
-    jsonObj.doctors = result;
-    res.status(200).json(jsonObj);
   });
+
+  const getDoctors = new Promise((resolve, reject) => {
+    try {
+      db.query(sqlQueryDoctors, (_err, result) => {
+        jsonObj.doctors = result;
+        resolve();
+      });
+    } catch (err) {
+      return res.status(500).json({ err: "Internal Server Error" })
+    }
+  });
+
+  Promise.all([getUsers, getPatients, getDoctors])
+    .then(() => {
+      res.status(200).json(jsonObj);
+    })
+    .catch((err) => {
+      res.status(500).json({ err: "Internal Server Error" })
+    });
 });
 
 router.get("/:id", (req, res) => {

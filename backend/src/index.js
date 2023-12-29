@@ -9,17 +9,7 @@ const db = require("./db/connection");
 app.use(cors());
 app.use(express.json());
 
-app.use("/lists", lists);
-
-app.get("/", (req, res) => {
-  const sqlQuery = "SELECT * FROM patients";
-  db.query(sqlQuery, (err, result) => {
-    if (err) {
-      return res.status(500).json({ error: "Internal Server Error" });
-    }
-    return res.status(200).json(result);
-  });
-});
+app.use("/", lists);
 
 app.post("/api/patients", (req, res) => {
   const { first_name, last_name, age, gender } = req.body;
