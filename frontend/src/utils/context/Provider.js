@@ -36,6 +36,9 @@ const Provider = ({ children }) => {
     handleDelete,
     currentPatient,
     setCurrentPatient,
+    registerPopup,
+    setRegisterPopup,
+    showRegisterPopup,
   } = useHandles();
 
   const value = {
@@ -64,6 +67,9 @@ const Provider = ({ children }) => {
       handleDelete,
       currentPatient,
       setCurrentPatient,
+      registerPopup,
+      setRegisterPopup,
+      showRegisterPopup,
     },
   }
 
