@@ -7,6 +7,7 @@ const useHandles = () => {
   const [values, setValues] = useState();
   const [deletePopup, setDeletePopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
+  const [registerPopup, setRegisterPopup] = useState(false);
   const [currentPatient, setCurrentPatient] = useState();
   const [logged, setLogged] = useState(false);
   
@@ -17,20 +18,26 @@ const useHandles = () => {
       const { data } = response;
       const userIndex = data.users.find(
         userData => userData.user === user.user && userData.password === user.password
-        );
-        if (userIndex) {
-          console.log("Usuário encontrado no índice: ", userIndex);
-          setLogged(true);
-          console.log(logged);
-          navigate("/main");
-        } else {
-          console.log(logged);
-          console.log("Usuário não encontrado");
-        }
+      );
+      if (userIndex) {
+        console.log("Usuário encontrado no índice: ", userIndex);
+        setLogged(true);
+        console.log(logged);
+        navigate("/main");
+      } else {
+        console.log(logged);
+        console.log("Usuário não encontrado");
+        window.alert("Invalid user or password");
+
+      }
     } catch (error) {
       console.log("Login error: ", error);
     }
   };
+
+  const showRegisterPopup = (boolean) => {
+    setRegisterPopup(boolean);
+  }
 
   const showDeletePopup = (boolean) => {
     setDeletePopup(boolean);
@@ -89,6 +96,9 @@ const useHandles = () => {
     editPopup,
     setEditPopup,
     showEditPopup,
+    registerPopup,
+    setRegisterPopup,
+    showRegisterPopup,
     handleRegister,
     handleSend,
     handleEdit,

@@ -4,10 +4,30 @@
   justify-content: center;
   flex-direction: row;
   padding: 15px 100px;
-  background-color: #ec7ae3;
+  background-color: #6b9e7d;
   margin: 5% auto;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px 100px;
+  background-color: #80bb95;
+  margin: 30%;
+}
+
+/* .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px 100px;
+  background-color: #80bb95;
+  margin: 30%;
+} */
 
 h1 {
   color: white;
@@ -90,7 +110,7 @@ h1 {
 }
 
 
-/* .App-logo {
+.App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -99,17 +119,6 @@ h1 {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -123,4 +132,4 @@ h1 {
   to {
     transform: rotate(360deg);
   }
-} */
+}
