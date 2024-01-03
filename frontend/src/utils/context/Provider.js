@@ -19,7 +19,9 @@ const Provider = ({ children }) => {
   }, []);
 
   const {
+    handleMain,
     handleLogin,
+    handleLogout,
     logged,
     setLogged,
     testandoContext,
@@ -31,7 +33,8 @@ const Provider = ({ children }) => {
     setEditPopup,
     showEditPopup,
     handleRegister,
-    handleSend,
+    handleSendPatient,
+    handleSendDoctor,
     handleEdit,
     handleDelete,
     currentPatient,
@@ -50,9 +53,11 @@ const Provider = ({ children }) => {
       setApiData,
     },
     hooks: {
+      handleMain,
       logged,
       setLogged,
       handleLogin,
+      handleLogout,
       testandoContext,
       values,
       deletePopup,
@@ -62,7 +67,8 @@ const Provider = ({ children }) => {
       setEditPopup,
       showEditPopup,
       handleRegister,
-      handleSend,
+      handleSendPatient,
+      handleSendDoctor,
       handleEdit,
       handleDelete,
       currentPatient,

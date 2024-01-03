@@ -25,6 +25,20 @@ app.post("/api/patients", (req, res) => {
   });
 });
 
+app.post("/api/doctors", (req, res) => {
+  const { first_name, last_name, age, gender } = req.body;
+  const sqlQuery = `
+    INSERT INTO doctors (first_name, last_name, age, gender)
+    VALUES (?, ?, ?, ?)`;
+
+  db.query(sqlQuery, [first_name, last_name, age, gender], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+    return res.status(200).json(result);
+  });
+});
+
 app.put("/api/edit/:id", (req, res) => {
   const { id } = req.params;
   const { first_name, last_name, age, gender } = req.body;
