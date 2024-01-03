@@ -35,6 +35,15 @@ const useHandles = () => {
     }
   };
 
+  const handleLogout = () => {
+    setLogged(false);
+    navigate("/");
+  };
+
+  const handleMain = () => {
+    navigate("/main");
+  };
+
   const showRegisterPopup = (boolean) => {
     setRegisterPopup(boolean);
   }
@@ -54,8 +63,19 @@ const useHandles = () => {
     }))
   };
 
-  const handleSend = () => {
+  const handleSendPatient = () => {
     axios.post("http://localhost:3001/api/patients", {
+      first_name: values.firstName,
+      last_name: values.lastName,
+      age: values.age,
+      gender: values.gender,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
+  const handleSendDoctor = () => {
+    axios.post("http://localhost:3001/api/doctors", {
       first_name: values.firstName,
       last_name: values.lastName,
       age: values.age,
@@ -86,7 +106,9 @@ const useHandles = () => {
   };
 
   return {
+    handleMain,
     handleLogin,
+    handleLogout,
     logged,
     setLogged,
     values,
@@ -100,7 +122,8 @@ const useHandles = () => {
     setRegisterPopup,
     showRegisterPopup,
     handleRegister,
-    handleSend,
+    handleSendPatient,
+    handleSendDoctor,
     handleEdit,
     handleDelete,
     currentPatient,
