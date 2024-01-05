@@ -11,19 +11,11 @@ const useHandles = () => {
   const [currentPatient, setCurrentPatient] = useState();
   const [logged, setLogged] = useState(false);
   const [selectedOption, setSelectedOption] = useState();
-
-  const handleStates = () => {
-    setValues();
-    setDeletePopup(false);
-    setEditPopup(false);
-    setRegisterPopup(false);
-    setCurrentPatient();
-    setSelectedOption();
-  };
   
   const handleMain = () => {
     navigate("/main");
-    handleStates();
+    setSelectedOption();
+    console.log(selectedOption);
   };
 
   const handleLogin = async (user) => {
@@ -38,7 +30,6 @@ const useHandles = () => {
         setLogged(true);
         console.log(logged);
         navigate("/main");
-        handleStates();
       } else {
         console.log(logged);
         console.log("Usuário não encontrado");
@@ -53,7 +44,6 @@ const useHandles = () => {
   const handleLogout = () => {
     navigate("/");
     setLogged(false);
-    handleStates();
   };
 
   const handleMenuOption = (option) => {

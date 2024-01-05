@@ -19,54 +19,59 @@ export default function Login() {
 
   return (
     <div
-      className="login-body"
       style={{
-        borderRadius: "4px",
-        boxShadow: "0px 0px 5px 3px rgba(0,0,0,0.4)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
       }}
     >
-      <form onSubmit={ handleFormSubmit }>
-        <div
-          style={{
-            textAlign: 'center',
-            marginTop: '10%',
-            paddingBottom: '5%',
-          }}
-        >
-          <img
-            src={pillImg}
-            alt="pill img"
+      <div
+        className="login-body login-content"
+      >
+        <form onSubmit={ handleFormSubmit }>
+          <div
             style={{
-              maxHeight: "120px",
-            }}
-            className="App-logo"
-          />
-        </div>
-        <div className="register-container login-container">
-          <input
-            type="text"
-            name="user"
-            placeholder="User"
-            className="register-input"
-            onChange={ handleRegister }
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="register-input"
-            onChange={ handleRegister }
-          />
-          <button
-            type="submit"
-            style={{
-              cursor: "pointer",
+              textAlign: 'center',
+              marginTop: '10%',
+              paddingBottom: '5%',
             }}
           >
-            Login
-          </button>
-        </div>
-      </form>
+            <img
+              src={pillImg}
+              alt="pill img"
+              style={{
+                maxHeight: "120px",
+              }}
+              className="App-logo"
+            />
+          </div>
+          <div className="register-container login-container">
+            <input
+              type="text"
+              name="user"
+              placeholder="User"
+              className="register-input"
+              onChange={ handleRegister }
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              className="register-input"
+              onChange={ handleRegister }
+            />
+            <button
+              type="submit"
+              style={{
+                cursor: "pointer",
+              }}
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
