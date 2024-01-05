@@ -10,8 +10,22 @@ const useHandles = () => {
   const [registerPopup, setRegisterPopup] = useState(false);
   const [currentPatient, setCurrentPatient] = useState();
   const [logged, setLogged] = useState(false);
+  const [selectedOption, setSelectedOption] = useState();
+
+  const handleStates = () => {
+    setValues();
+    setDeletePopup(false);
+    setEditPopup(false);
+    setRegisterPopup(false);
+    setCurrentPatient();
+    setSelectedOption();
+  };
   
-  console.log(logged);
+  const handleMain = () => {
+    navigate("/main");
+    handleStates();
+  };
+
   const handleLogin = async (user) => {
     try {
       const response = await axios.get(`http://localhost:3001/`);
@@ -24,6 +38,7 @@ const useHandles = () => {
         setLogged(true);
         console.log(logged);
         navigate("/main");
+        handleStates();
       } else {
         console.log(logged);
         console.log("Usuário não encontrado");
@@ -36,12 +51,13 @@ const useHandles = () => {
   };
 
   const handleLogout = () => {
-    setLogged(false);
     navigate("/");
+    setLogged(false);
+    handleStates();
   };
 
-  const handleMain = () => {
-    navigate("/main");
+  const handleMenuOption = (option) => {
+    setSelectedOption(option);
   };
 
   const showRegisterPopup = (boolean) => {
@@ -106,6 +122,9 @@ const useHandles = () => {
   };
 
   return {
+    handleMenuOption,
+    selectedOption,
+    setSelectedOption,
     handleMain,
     handleLogin,
     handleLogout,

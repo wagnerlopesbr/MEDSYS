@@ -49,9 +49,22 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 15px 100px;
-  background-color: #80bb95;
+  padding: 20px;
+  background-color: #32bea6;
   margin: 30%;
+}
+
+.login-body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 200px 800px;
+  background-color: #32bea6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .radio-div {
