@@ -18,7 +18,13 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div
+      className="login-body"
+      style={{
+        borderRadius: "4px",
+        boxShadow: "0px 0px 5px 3px rgba(0,0,0,0.4)",
+      }}
+    >
       <form onSubmit={ handleFormSubmit }>
         <div
           style={{
@@ -51,7 +57,12 @@ export default function Login() {
             className="register-input"
             onChange={ handleRegister }
           />
-          <button type="submit">
+          <button
+            type="submit"
+            style={{
+              cursor: "pointer",
+            }}
+          >
             Login
           </button>
         </div>

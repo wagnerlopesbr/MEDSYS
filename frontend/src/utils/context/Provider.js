@@ -42,6 +42,9 @@ const Provider = ({ children }) => {
     registerPopup,
     setRegisterPopup,
     showRegisterPopup,
+    handleMenuOption,
+    selectedOption,
+    setSelectedOption,
   } = useHandles();
 
   const value = {
@@ -53,6 +56,9 @@ const Provider = ({ children }) => {
       setApiData,
     },
     hooks: {
+      handleMenuOption,
+      selectedOption,
+      setSelectedOption,
       handleMain,
       logged,
       setLogged,
