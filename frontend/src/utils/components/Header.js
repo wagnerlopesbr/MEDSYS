@@ -70,7 +70,6 @@ export default function Header() {
           className="nav-btn"
           onClick={ () => {
             showRegisterPopup(!registerPopup);
-            setBlur(!blur);
           }}
           style={{
             fontSize: "30px"
