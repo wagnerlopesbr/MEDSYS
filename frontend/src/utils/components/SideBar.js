@@ -1,12 +1,12 @@
 import '../../App.css';
-import Grid from './Grid';
 import GlobalContext from '../context/GlobalContext';
 import { useContext } from 'react';
 
-function SideBar({ list }) {
+function SideBar() {
   const { api, hooks } = useContext(GlobalContext);
   const {
-    selectedOption,
+    setCurrentPage,
+    setRole,
     setSelectedOption,
     handleMenuOption,
   } = hooks;
@@ -18,6 +18,8 @@ function SideBar({ list }) {
         onClick={ () => {
           handleMenuOption(key);
           setSelectedOption(key);
+          setRole(key);
+          setCurrentPage(1);
         } }
       >
         { key.charAt(0).toUpperCase() + key.slice(1)}
@@ -30,10 +32,6 @@ function SideBar({ list }) {
         <menu style={{color: "#fff"}}>
           { menuOptions }
         </menu>
-      </div>
-      <div>
-        { selectedOption === "patients" && <Grid list={ api.apiData.patients }/> }
-        { selectedOption === "doctors" && <Grid list={ api.apiData.doctors }/> }
       </div>
     </main>
   );

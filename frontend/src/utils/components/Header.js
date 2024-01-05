@@ -12,6 +12,8 @@ export default function Header() {
   const { hooks } = useContext(GlobalContext);
 
   const {
+    blur,
+    setBlur,
     handleMain,
     handleRegister,
     handleSendPatient,
@@ -26,8 +28,7 @@ export default function Header() {
       style={{
         boxShadow: "0px 0px 5px 0px rgba(0,0,0,2)",
         width: "100%",
-      }}
-    >
+      }}>
     <nav
       className="nav-container"
     >
@@ -67,7 +68,10 @@ export default function Header() {
       >
         <button
           className="nav-btn"
-          onClick={ () => showRegisterPopup(!registerPopup)}
+          onClick={ () => {
+            showRegisterPopup(!registerPopup);
+            setBlur(!blur);
+          }}
           style={{
             fontSize: "30px"
           }}
@@ -85,7 +89,7 @@ export default function Header() {
         </button>
       </div>
     </nav>
-    <register
+    <div
       className="header-container"
       style={{
         display: registerPopup ? "flex" : "none",
@@ -179,6 +183,6 @@ export default function Header() {
               Send
             </button>
       </div>
-    </register>
+    </div>
   </div>)
 };

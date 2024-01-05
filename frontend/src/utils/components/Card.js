@@ -8,16 +8,18 @@ export default function Card({ person }) {
   const { hooks } = useContext(GlobalContext);
   
   const {
+    role,
     showDeletePopup,
     showEditPopup,
     setCurrentPerson,
   } = hooks;
-
+  console.log(role);
+  
   return (
     <div
         key={ person.id }
         id={ person.id }
-        className="card"
+        className={ role === "patients" ? "card" : "doctors-card" }
       >
         <div>
           <div className="person-photo-container">

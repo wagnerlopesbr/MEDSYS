@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import '../../App.css';
 import Card from './Card';
 import PagesButton from './PagesButton';
@@ -6,7 +6,7 @@ import GlobalContext from '../context/GlobalContext';
 import DeletePopup from './DeletePopup';
 import EditPopup from './EditPopup';
 
-export default function Grid({ list }) {
+export default function Grid({ list, role }) {
   const { hooks } = useContext(GlobalContext);
   
   const { currentPage, deletePopup, setDeletePopup, currentPerson, editPopup, setEditPopup } = hooks;
@@ -25,8 +25,20 @@ export default function Grid({ list }) {
 
   return (
     <div>
-      { deletePopup && <DeletePopup toggle={ setDeletePopup } currentPerson={ currentPerson }/> }
-              { editPopup && <EditPopup toggle={ setEditPopup } currentPerson={ currentPerson } /> }
+      { deletePopup &&
+        <DeletePopup
+          toggle={ setDeletePopup }
+          currentPerson={ currentPerson }
+          entityType={ role }
+        />
+      }
+      { editPopup &&
+        <EditPopup
+          toggle={ setEditPopup }
+          currentPerson={ currentPerson }
+          entityType={ role }
+        />
+      }
       <div
         className="grid"
         style={

@@ -4,14 +4,15 @@ import cancelIcon from "../images/cancel.png";
 import '../../App.css';
 import GlobalContext from '../context/GlobalContext';
 
-export default function DeletePopup({ currentPerson, toggle }) {
+export default function DeletePopup({ currentPerson, toggle, entityType }) {
+  console.log("console DeletePopup: ", entityType);
   const { hooks } = useContext(GlobalContext);
   const { handleDelete } = hooks;
   
   return <div className="showPopup">
     <button
       onClick={ () => {
-        handleDelete(currentPerson.id);
+        handleDelete(currentPerson.id, entityType);
         toggle(false);
         }
       }
