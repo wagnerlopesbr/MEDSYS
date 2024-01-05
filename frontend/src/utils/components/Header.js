@@ -3,11 +3,14 @@ import imgIcon from "../images/hospital-icon.png";
 import pillImg from "../images/medsys-pill.png";
 import addIcon from "../images/add-icon.png";
 import logoutIcon from "../images/logout-icon.png";
-import useHandles from "../useHandles";
+import GlobalContext from '../context/GlobalContext';
+import { useContext } from "react";
 import "../../App.css";
 
 export default function Header() {
   const [role, setRole] = useState("");
+  const { hooks } = useContext(GlobalContext);
+
   const {
     handleMain,
     handleRegister,
@@ -17,7 +20,7 @@ export default function Header() {
     showRegisterPopup,
     handleLogout,
     setLogged,
-  } = useHandles();
+  } = hooks;
 
     return (<div
       style={{
