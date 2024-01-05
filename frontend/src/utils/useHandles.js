@@ -8,9 +8,17 @@ const useHandles = () => {
   const [deletePopup, setDeletePopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
   const [registerPopup, setRegisterPopup] = useState(false);
-  const [currentPatient, setCurrentPatient] = useState();
+  const [currentPerson, setCurrentPerson] = useState();
   const [logged, setLogged] = useState(false);
   const [selectedOption, setSelectedOption] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
   
   const handleMain = () => {
     navigate("/main");
@@ -112,6 +120,10 @@ const useHandles = () => {
   };
 
   return {
+    currentPage,
+    setCurrentPage,
+    handleNextPage,
+    handlePrevPage,
     handleMenuOption,
     selectedOption,
     setSelectedOption,
@@ -135,8 +147,8 @@ const useHandles = () => {
     handleSendDoctor,
     handleEdit,
     handleDelete,
-    currentPatient,
-    setCurrentPatient,
+    currentPerson,
+    setCurrentPerson,
   };
 };
 

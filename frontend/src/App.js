@@ -1,5 +1,5 @@
 import './App.css';
-import Main from './utils/components/Main';
+import MainPage from './utils/components/MainPage';
 import Login from './utils/components/Login';
 import GlobalContext from '../src/utils/context/GlobalContext';
 import { useContext } from 'react';
@@ -11,7 +11,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/main" element={<Main />} />
+      <Route path="/main" element={<MainPage />} />
     </Routes>
   );
 }
