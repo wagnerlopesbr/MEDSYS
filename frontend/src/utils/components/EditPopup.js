@@ -1,52 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import confirmIcon from "../images/confirm.png";
 import cancelIcon from "../images/cancel.png";
 import '../../App.css';
-import useHandles from '../useHandles';
+import GlobalContext from '../context/GlobalContext';
 
-export default function EditPopup({ currentPatient, toggle }) {
-  const { handleEdit } = useHandles();
-  const [editedPatient, setEditedPatient] = useState({
-    first_name: currentPatient.first_name,
-    last_name: currentPatient.last_name,
-    age: currentPatient.age,
-    gender: currentPatient.gender,
+
+export default function EditPopup({ currentPerson, toggle }) {
+  const { hooks } = useContext(GlobalContext);
+  const { handleEdit } = hooks;
+  const [editedPerson, setEditedPerson] = useState({
+    first_name: currentPerson.first_name,
+    last_name: currentPerson.last_name,
+    age: currentPerson.age,
+    gender: currentPerson.gender,
   });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setEditedPatient((prevData) => ({
+    setEditedPerson((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
   return <div className="showPopup">
-    { currentPatient && (
-      <div key={ currentPatient.id }>
+    { currentPerson && (
+      <div key={ currentPerson.id }>
         <input
           type="text"
           name="first_name"
           onChange={ handleInputChange }
-          placeholder={ editedPatient.first_name }
+          placeholder={ editedPerson.first_name }
         />
         <input
           type="text"
           name="last_name"
           onChange={ handleInputChange }
-          placeholder={ editedPatient.last_name }
+          placeholder={ editedPerson.last_name }
         />
         <input
           type="number"
           name="age"
           onChange={ handleInputChange }
-          placeholder={ editedPatient.age }
+          placeholder={ editedPerson.age }
         />
         <select
           type="text"
           name="gender"
           onChange={ handleInputChange }
-          placeholder={ editedPatient.gender }
+          placeholder={ editedPerson.gender }
         >
           <option value="Male" style={{
               textAlign: 'center',
@@ -66,7 +68,7 @@ export default function EditPopup({ currentPatient, toggle }) {
         <button
           className="confirm-btn"
           onClick={ ()=> {
-              handleEdit(currentPatient.id, editedPatient);
+              handleEdit(currentPerson.id, editedPerson);
               toggle(false);
             }
           }

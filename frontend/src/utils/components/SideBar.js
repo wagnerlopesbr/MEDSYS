@@ -1,5 +1,5 @@
 import '../../App.css';
-import Table from './Table';
+import Grid from './Grid';
 import GlobalContext from '../context/GlobalContext';
 import { useContext } from 'react';
 
@@ -30,12 +30,10 @@ function SideBar({ list }) {
         <menu style={{color: "#fff"}}>
           { menuOptions }
         </menu>
-
-
       </div>
-      <div className="table-container">
-        { selectedOption === "patients" && <Table list={ api.apiData.patients }/> }
-        { selectedOption === "doctors" && <Table list={ api.apiData.doctors }/> }
+      <div>
+        { selectedOption === "patients" && <Grid list={ api.apiData.patients }/> }
+        { selectedOption === "doctors" && <Grid list={ api.apiData.doctors }/> }
       </div>
     </main>
   );

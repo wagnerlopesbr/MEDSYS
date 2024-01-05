@@ -19,6 +19,10 @@ const Provider = ({ children }) => {
   }, []);
 
   const {
+    currentPage,
+    setCurrentPage,
+    handleNextPage,
+    handlePrevPage,
     handleMain,
     handleLogin,
     handleLogout,
@@ -37,8 +41,8 @@ const Provider = ({ children }) => {
     handleSendDoctor,
     handleEdit,
     handleDelete,
-    currentPatient,
-    setCurrentPatient,
+    currentPerson,
+    setCurrentPerson,
     registerPopup,
     setRegisterPopup,
     showRegisterPopup,
@@ -56,6 +60,10 @@ const Provider = ({ children }) => {
       setApiData,
     },
     hooks: {
+      currentPage,
+      setCurrentPage,
+      handleNextPage,
+      handlePrevPage,
       handleMenuOption,
       selectedOption,
       setSelectedOption,
@@ -77,8 +85,8 @@ const Provider = ({ children }) => {
       handleSendDoctor,
       handleEdit,
       handleDelete,
-      currentPatient,
-      setCurrentPatient,
+      currentPerson,
+      setCurrentPerson,
       registerPopup,
       setRegisterPopup,
       showRegisterPopup,
