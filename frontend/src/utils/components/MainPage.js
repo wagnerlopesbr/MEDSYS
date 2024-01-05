@@ -2,28 +2,25 @@ import '../../App.css';
 import Header from './Header';
 import SideBar from './SideBar';
 import Workbench from './Workbench';
-import GlobalContext from '../context/GlobalContext';
 import { useContext } from 'react';
+import GlobalContext from '../context/GlobalContext';
 
 function MainPage() {
-  useContext(GlobalContext);
   return (
-    <>
+    <div>
       <Header />
       <div style={{
-        display: "initial",
+        display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
         width: "100%",
         height: "100%",
       }}>
-        <>
-          <SideBar />
-          <Workbench />
-        </>
+        <SideBar />
+        <Workbench />
       </div>
-    </>
+    </div>
   );
 };
 

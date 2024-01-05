@@ -5,7 +5,7 @@ import '../../App.css';
 import GlobalContext from '../context/GlobalContext';
 
 
-export default function EditPopup({ currentPerson, toggle }) {
+export default function EditPopup({ currentPerson, toggle, entityType }) {
   const { hooks } = useContext(GlobalContext);
   const { handleEdit } = hooks;
   const [editedPerson, setEditedPerson] = useState({
@@ -68,7 +68,7 @@ export default function EditPopup({ currentPerson, toggle }) {
         <button
           className="confirm-btn"
           onClick={ ()=> {
-              handleEdit(currentPerson.id, editedPerson);
+              handleEdit(currentPerson.id, editedPerson, entityType);
               toggle(false);
             }
           }

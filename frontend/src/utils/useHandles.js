@@ -10,8 +10,9 @@ const useHandles = () => {
   const [registerPopup, setRegisterPopup] = useState(false);
   const [currentPerson, setCurrentPerson] = useState();
   const [logged, setLogged] = useState(false);
-  const [selectedOption, setSelectedOption] = useState();
+  const [selectedOption, setSelectedOption] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [role, setRole] = useState("");
   
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -23,12 +24,11 @@ const useHandles = () => {
   const handleMain = () => {
     navigate("/main");
     setSelectedOption();
-    console.log(selectedOption);
   };
 
   const handleLogin = async (user) => {
     try {
-      const response = await axios.get(`http://localhost:3001/`);
+      const response = await axios.get(`http://localhost:3001/api/lists`);
       const { data } = response;
       const userIndex = data.users.find(
         userData => userData.user === user.user && userData.password === user.password
@@ -51,6 +51,7 @@ const useHandles = () => {
 
   const handleLogout = () => {
     navigate("/");
+    setSelectedOption();
     setLogged(false);
   };
 
@@ -99,8 +100,10 @@ const useHandles = () => {
     });
   };
 
-  const handleEdit = (id, editedPatient) => {
-    axios.put(`http://localhost:3001/api/edit/${id}`, editedPatient)
+  const handleEdit = (id, editedPatient, entityType) => {
+    const entity = entityType === "patients" ? "patients" : "doctors";
+
+    axios.put(`http://localhost:3001/api/${entity}/edit/${id}`, editedPatient)
       .then((response) => {
         console.log(response.data);
       })
@@ -109,8 +112,10 @@ const useHandles = () => {
       });
   };
 
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/api/delete/${id}`)
+  const handleDelete = (id, entityType) => {
+    const entity = entityType === "patients" ? "patients" : "doctors";
+
+    axios.delete(`http://localhost:3001/api/${entity}/delete/${id}`)
       .then((response) => {
         console.log(response.data);
       })
@@ -120,6 +125,8 @@ const useHandles = () => {
   };
 
   return {
+    role,
+    setRole,
     currentPage,
     setCurrentPage,
     handleNextPage,

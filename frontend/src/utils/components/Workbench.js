@@ -5,13 +5,16 @@ import { useContext } from 'react';
 
 function Workbench() {
   const { hooks, api } = useContext(GlobalContext);
-  const { selectedOption } = hooks;
+  const {
+    role,
+    selectedOption,
+  } = hooks;
 
   return (
-    <>
-      { selectedOption === "patients" && <Grid list={ api.apiData.patients }/> }
-      { selectedOption === "doctors" && <Grid list={ api.apiData.doctors }/> }
-    </>
+    <div className="grid">
+      { selectedOption === "patients" && <Grid role={ role }list={ api.apiData.patients }/> }
+      { selectedOption === "doctors" && <Grid role={ role }list={ api.apiData.doctors }/> }
+    </div>
   );
 };
 

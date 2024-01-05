@@ -7,7 +7,7 @@ const Provider = ({ children }) => {
   const [apiData, setApiData] = useState([]);
 
   const getApiData = () => {
-    axios.get("http://localhost:3001/").then((response) => {
+    axios.get("http://localhost:3001/api/lists").then((response) => {
       setApiData(response.data);
     }).catch((error) => {
       console.log("axios deu ruim", error);
@@ -19,6 +19,8 @@ const Provider = ({ children }) => {
   }, []);
 
   const {
+    role,
+    setRole,
     currentPage,
     setCurrentPage,
     handleNextPage,
@@ -60,6 +62,8 @@ const Provider = ({ children }) => {
       setApiData,
     },
     hooks: {
+      role,
+      setRole,
       currentPage,
       setCurrentPage,
       handleNextPage,
