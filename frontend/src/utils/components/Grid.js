@@ -24,7 +24,7 @@ export default function Grid({ list, role }) {
   const numColumns = totalColumns < maxColumns ? totalColumns : maxColumns;
 
   return (
-    <div>
+    <div className="grid-container">
       { deletePopup &&
         <DeletePopup
           toggle={ setDeletePopup }
@@ -39,21 +39,23 @@ export default function Grid({ list, role }) {
           entityType={ role }
         />
       }
-      <div
-        className="grid"
-        style={
-          {
-            gridTemplateColumns: `
-              repeat(${numColumns},
-              minmax(min-content, 1fr))
-            `
+      <div>
+        <div
+          className="internal-grid-cards"
+          style={
+            {
+              gridTemplateColumns: `
+                repeat(${numColumns},
+                minmax(min-content, 1fr))
+              `,
+            }
           }
-        }
-      >
-        {typeof list !== "undefined" &&
-          people.map((person) => (
-            <Card key={ person.id } person={ person } />
-          ))}
+        >
+          {typeof list !== "undefined" &&
+            people.map((person) => (
+              <Card key={ person.id } person={ person } />
+            ))}
+        </div>
       </div>
       <div className="pages-btn-container">
         <PagesButton totalPages={ totalPages } />

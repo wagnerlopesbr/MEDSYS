@@ -4,7 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 const useHandles = () => {
   const navigate = useNavigate();
-  const [values, setValues] = useState();
+  const initialState = {
+    firstName: "",
+    lastName: "",
+    age: "",
+    gender: "",
+  };
+  const [values, setValues] = useState(initialState);
   const [deletePopup, setDeletePopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
   const [registerPopup, setRegisterPopup] = useState(false);
@@ -36,7 +42,6 @@ const useHandles = () => {
       if (userIndex) {
         console.log("Usuário encontrado no índice: ", userIndex);
         setLogged(true);
-        console.log(logged);
         navigate("/main");
       } else {
         console.log(logged);
@@ -71,10 +76,11 @@ const useHandles = () => {
     setEditPopup(boolean);
   };
   
-  const handleRegister = (value) => {
+  const handleRegister = (event) => {
+    const { name, value } = event.target;
     setValues(previousValues => ({
       ...previousValues,
-      [value.target.name]: value.target.value,
+      [name]: value,
     }))
   };
 
@@ -124,7 +130,22 @@ const useHandles = () => {
       });
   };
 
+  const handlePhotoSelect = (event) => {
+    const selectedPhoto = document.getElementById('avatar-photo');
+
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        selectedPhoto.src = e.target.result;
+      };
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  };
+
   return {
+    handlePhotoSelect,
     role,
     setRole,
     currentPage,
@@ -140,6 +161,7 @@ const useHandles = () => {
     logged,
     setLogged,
     values,
+    setValues,
     deletePopup,
     setDeletePopup,
     showDeletePopup,

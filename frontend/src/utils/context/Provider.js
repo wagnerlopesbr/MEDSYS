@@ -19,6 +19,7 @@ const Provider = ({ children }) => {
   }, []);
 
   const {
+    handlePhotoSelect,
     role,
     setRole,
     currentPage,
@@ -32,6 +33,7 @@ const Provider = ({ children }) => {
     setLogged,
     testandoContext,
     values,
+    setValues,
     deletePopup,
     setDeletePopup,
     showDeletePopup,
@@ -62,6 +64,7 @@ const Provider = ({ children }) => {
       setApiData,
     },
     hooks: {
+      handlePhotoSelect,
       role,
       setRole,
       currentPage,
@@ -78,6 +81,7 @@ const Provider = ({ children }) => {
       handleLogout,
       testandoContext,
       values,
+      setValues,
       deletePopup,
       setDeletePopup,
       showDeletePopup,

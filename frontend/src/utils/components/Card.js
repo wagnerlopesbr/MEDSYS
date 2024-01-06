@@ -13,7 +13,6 @@ export default function Card({ person }) {
     showEditPopup,
     setCurrentPerson,
   } = hooks;
-  console.log(role);
   
   return (
     <div

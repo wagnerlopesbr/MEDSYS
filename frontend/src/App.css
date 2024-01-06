@@ -1,11 +1,14 @@
-.header-container {
+.register-box {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   padding: 15px 100px;
   background-color: #32bea6;
+  border-radius: 8px;
   box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .nav-container {
@@ -43,14 +46,49 @@
   filter: invert(62%) sepia(77%) saturate(5746%) hue-rotate(152deg) brightness(98%) contrast(107%);
 }
 
+.register-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+/* .background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('caminho/para/sua/imagem.jpg');
+  background-size: cover;
+  backdrop-filter: blur(5px);
+  z-index: -1;
+} */
+
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 1520px;
+  min-height: 731px;
+  width: 190%;
+}
+
 .grid {
-  display: grid;
   grid-gap: 10px;
   padding: 2%;
   padding-top: 0px;
   width: 800px;
   min-height: 710px;
   max-height: 800px;
+  justify-content: start;
+  align-items: start;
+}
+
+.internal-grid-cards {
+  display: grid;
 }
 
 .card {
@@ -199,6 +237,7 @@ h1 {
   padding: 5px 5px;
   box-sizing: border-box;
   width: 100%;
+  cursor: pointer;
 }
 
 .edit-btn, .delete-btn {
@@ -248,7 +287,25 @@ h1 {
   overflow-y: auto;
 }
 
+.register-photo-div {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 50px;
+  border: 1px solid black;
+}
 
+.register-photo-div button {
+  flex: 1;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.register-photo-icons-div {
+  display: flex;
+}
 
 .App-logo {
   height: 40vmin;
