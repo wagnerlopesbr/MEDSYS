@@ -18,15 +18,15 @@ export default function Card({ person }) {
     <div
         key={ person.id }
         id={ person.id }
-        className={ role === "patients" ? "card" : "doctors-card" }
+        className={ role === "doctors" ? "doctors-card" : "card" }
       >
         <div>
           <div className="person-photo-container">
-          <img
-            className="person-photo"
-            src={ unknownPerson }
-            alt="person-photo"
-          />
+            <img
+              className="person-photo"
+              src={ unknownPerson }
+              alt="person-photo"
+            />
           </div>
           <h3>{ person.first_name } { person.last_name }</h3>
           <p>Age: {person.age}</p>

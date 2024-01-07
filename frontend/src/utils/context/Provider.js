@@ -60,6 +60,7 @@ const Provider = ({ children }) => {
       apiData: {
         patients: apiData.patients,
         doctors: apiData.doctors,
+        // sectors: apiData.sectors,
       },
       setApiData,
     },

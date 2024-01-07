@@ -32,7 +32,6 @@ function Register({ toggle }) {
     setSelectedPhoto(photo);
   };
   
-  console.log("values: ", values);
   return (
     <>
       <div
