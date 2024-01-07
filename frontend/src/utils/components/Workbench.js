@@ -10,10 +10,11 @@ function Workbench() {
     selectedOption,
   } = hooks;
 
+  const dynamicList = api.apiData[selectedOption];
+
   return (
     <div className="grid">
-      { selectedOption === "patients" && <Grid role={ role }list={ api.apiData.patients }/> }
-      { selectedOption === "doctors" && <Grid role={ role }list={ api.apiData.doctors }/> }
+      { dynamicList && <Grid role={ role }list={ dynamicList }/> }
     </div>
   );
 };

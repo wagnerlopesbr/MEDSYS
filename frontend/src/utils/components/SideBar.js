@@ -28,8 +28,8 @@ function SideBar() {
 
   return (
     <main className="sidebar">
-      <div className="sidebar-menu" >
-        <menu style={{color: "#fff"}}>
+      <div className="sidebar-menu">
+        <menu style={{ color: "#fff" }}>
           { menuOptions }
         </menu>
       </div>

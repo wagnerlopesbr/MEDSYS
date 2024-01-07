@@ -36,7 +36,7 @@ const useHandles = () => {
     try {
       const response = await axios.get(`http://localhost:3001/api/lists`);
       const { data } = response;
-      const userIndex = data.users.find(
+      const userIndex = data.system_users.find(
         userData => userData.user === user.user && userData.password === user.password
       );
       if (userIndex) {

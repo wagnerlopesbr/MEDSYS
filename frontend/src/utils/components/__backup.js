@@ -1,38 +1,27 @@
-import React, { useContext, useState } from 'react';
-import '../../App.css';
-import DeletePopup from './DeletePopup';
-import EditPopup from './EditPopup';
-import Card from './Card';
-import PagesButton from './PagesButton';
-import GlobalContext from '../context/GlobalContext';
+CREATE TABLE wards (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  ward_name VARCHAR(255) NOT NULL FOREIGN KEY REFERENCES wardNames(id)
+);
 
-export default function Grid({ list }) {
-  const { hooks } = useContext(GlobalContext);
-  
-  const {
+// Tabela para armazenar os nomes das alas (ward_names)
+CREATE TABLE wardNames (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  ward_name VARCHAR(255) NOT NULL
+);
 
-    deletePopup,
-    setDeletePopup,
-    showDeletePopup,
-    editPopup,
-    setEditPopup,
-    showEditPopup,
-    currentPatient,
-    setCurrentPatient,
-  } = hooks;
+// Tabela para cada sala de cada ala (ward)
+CREATE TABLE ward_rooms (
+  id INT PRIMARY KEY,
+  ward_id INT,
+  capacity INT,
+  FOREIGN KEY (ward_id) REFERENCES wards(id)
+);
 
-  return <div>
-    <div className="grid">
-      { typeof list !== "undefined" &&
-        list.map((patient) => (
-          <Card patient={ patient }/>
-          ))
-        }
-      { deletePopup && <DeletePopup toggle={setDeletePopup} currentPatient={currentPatient} /> }
-      { editPopup && <EditPopup toggle={setEditPopup} currentPatient={currentPatient} /> }
-    </div>
-    <div className="pages-btn-container">
-      <PagesButton cardsList={ list }/>
-    </div>
-  </div>
-};
+// Tabela para armazenar informações sobre cada sala (room)
+CREATE TABLE rooms (
+  id INT PRIMARY KEY,
+  ward_room_id INT,
+  ward_id INT,
+  FOREIGN KEY (ward_room_id) REFERENCES ward_rooms(id),
+  FOREIGN KEY (ward_id) REFERENCES wards(id)
+);

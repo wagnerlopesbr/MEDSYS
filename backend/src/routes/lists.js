@@ -5,14 +5,14 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   const jsonObj = {};
-  const sqlQueryUsers = `SELECT * FROM users;`;
+  const sqlQueryUsers = `SELECT * FROM system_users;`;
   const sqlQueryPatients = `SELECT * FROM patients;`;
   const sqlQueryDoctors = `SELECT * FROM doctors;`;
 
   const getUsers = new Promise((resolve, reject) => {
     try {
       db.query(sqlQueryUsers, (_err, result) => {
-        jsonObj.users = result;
+        jsonObj.system_users = result;
         resolve();
       });
     } catch (err) {
