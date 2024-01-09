@@ -14,18 +14,30 @@ export default function Card({ person }) {
     setCurrentPerson,
   } = hooks;
   
+  let cardClassName;
+
+  switch (role) {
+    case "doctors":
+      cardClassName = "doctors-card";
+      break;
+    case "patients":
+      cardClassName = "patients-card";
+      break;
+    default:
+      cardClassName = "doctors-card";
+  };
+
   return (
     <div
         key={ person.id }
         id={ person.id }
-        className={ role === "doctors" ? "doctors-card" : "card" }
+        className={ cardClassName }
       >
-        <div>
           <div className="person-photo-container">
             <img
               className="person-photo"
               src={ unknownPerson }
-              alt="person-photo"
+              alt={ `Photo of ${person.first_name} ${person.last_name}`}
             />
           </div>
           <h3>{ person.first_name } { person.last_name }</h3>
@@ -54,6 +66,5 @@ export default function Card({ person }) {
             </button>
           </div>
         </div>
-      </div>
   )
 };

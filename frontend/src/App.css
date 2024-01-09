@@ -91,7 +91,7 @@
   display: grid;
 }
 
-.card {
+.patients-card {
   display: flex;
   align-items: center;
   justify-content: center;
