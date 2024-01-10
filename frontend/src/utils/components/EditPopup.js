@@ -7,12 +7,14 @@ import GlobalContext from '../context/GlobalContext';
 
 export default function EditPopup({ currentPerson, toggle, entityType }) {
   const { hooks } = useContext(GlobalContext);
-  const { handleEdit } = hooks;
+  const { handleEdit, handleDate } = hooks;
   const [editedPerson, setEditedPerson] = useState({
     first_name: currentPerson.first_name,
     last_name: currentPerson.last_name,
-    age: currentPerson.age,
+    birth_date: handleDate(currentPerson.birth_date),
     gender: currentPerson.gender,
+    status_active: currentPerson.status_active,
+    document: currentPerson.document,
   });
 
   const handleInputChange = (event) => {
@@ -39,10 +41,16 @@ export default function EditPopup({ currentPerson, toggle, entityType }) {
           placeholder={ editedPerson.last_name }
         />
         <input
-          type="number"
-          name="age"
+          type="date"
+          name="birth_date"
           onChange={ handleInputChange }
-          placeholder={ editedPerson.age }
+          placeholder={ handleDate(editedPerson.birth_date) }
+        />
+        <input
+          type="number"
+          name="document"
+          onChange={ handleInputChange }
+          placeholder={ editedPerson.document }
         />
         <select
           type="text"

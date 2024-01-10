@@ -30,14 +30,14 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { first_name, last_name, age, gender } = req.body;
+  const { first_name, last_name, birth_date, gender, status_active, document } = req.body;
   const sqlQuery = `
-    INSERT INTO patients (first_name, last_name, age, gender)
-    VALUES (?, ?, ?, ?)`;
+    INSERT INTO patients (first_name, last_name, birth_date, gender, status_active, document)
+    VALUES (?, ?, ?, ?, ?, ?);`;
 
-  db.query(sqlQuery, [first_name, last_name, age, gender], (err, result) => {
+  db.query(sqlQuery, [first_name, last_name, birth_date, gender, status_active, document], (err, result) => {
     if (err) {
-      return res.status(500).json({ error: "Internal Server Error" });
+      return res.status(500).json({ error: err.message });
     }
     return res.status(200).json(result);
   });
@@ -45,16 +45,16 @@ router.post("/", (req, res) => {
 
 router.put("/edit/:id", (req, res) => {
   const { id } = req.params;
-  const { first_name, last_name, age, gender } = req.body;
+  const { first_name, last_name, birth_date, gender, status_active, document } = req.body;
   const sqlQuery = `
     UPDATE patients
-    SET first_name = ?, last_name = ?, age = ?, gender = ?
+    SET first_name = ?, last_name = ?, birth_date = ?, gender = ?, status_active = ?, document = ?
     WHERE id = ?
   `;
 
-  db.query(sqlQuery, [first_name, last_name, age, gender, id], (err, result) => {
+  db.query(sqlQuery, [first_name, last_name, birth_date, gender, status_active, document, id], (err, result) => {
     if (err) {
-      return res.status(500).json({ error: "Internal Server Error" });
+      return res.status(500).json( err.message );
     }
     return res.status(200).json(result);
   });

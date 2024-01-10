@@ -11,8 +11,10 @@ function Register({ toggle }) {
   const initialState = {
     firstName: "",
     lastName: "",
-    age: "",
+    birthDate: "",
     gender: "",
+    statusActive: "",
+    document: "",
   };
   
   const { hooks } = useContext(GlobalContext);
@@ -30,7 +32,16 @@ function Register({ toggle }) {
     setRole("");
     setValues(initialState);
     setSelectedPhoto(photo);
+    const radioBtn = document.getElementsByName("userType");
+    radioBtn.forEach((btn) => btn.checked = false);
   };
+
+  const validation = values.firstName.length > 0
+    && values.lastName.length > 0
+    && values.birthDate.length > 0
+    && values.gender !== "Gender"
+    && values.document.length === 9
+    && values.statusActive !== "Status";
   
   return (
     <>
@@ -79,37 +90,45 @@ function Register({ toggle }) {
               <input
                 type="radio"
                 name="userType"
-                value="doctor"
-                onClick={ () => setRole("doctor") }
-              />
-                Doctor
-            </label>
-            <label className="register-label">
-              <input
-                type="radio"
-                name="userType"
                 value="patient"
                 onClick={ () => setRole("patient") }
               />
                 Patient
             </label>
+            <label className="register-label">
+              <input
+                type="radio"
+                name="userType"
+                value="doctor"
+                onClick={ () => setRole("doctor") }
+              />
+                Doctor
+            </label>
           </div>
             <input
               type="text"
               name="firstName"
+              style={{ width: "130px", paddingLeft: "2px" }}
               placeholder="First Name"
               value={ values.firstName }
               className="register-input"
               onChange={ handleRegister }
             />
             <input
+              type="date"
+              style={{ width: "105px", height: "15px", paddingLeft: "2px" }}
+              name="birthDate"
+              value={ values.birthDate }
+              className="register-input"
+              onChange={ handleRegister }
+            />
+            <input
               type="number"
-              min="0"
-              max="150"
-              style={{ width: "64px", paddingLeft: "2px" }}
-              name="age"
-              placeholder="Age"
-              value={ values.age }
+              inputMode="numeric"
+              name="document"
+              placeholder="Document"
+              style={{ width: "100px", height: "15px", paddingLeft: "2px" }}
+              value={ values.document }
               className="register-input"
               onChange={ handleRegister }
             />
@@ -118,6 +137,7 @@ function Register({ toggle }) {
             <input
               type="text"
               name="lastName"
+              style={{ width: "130px", paddingLeft: "2px" }}
               placeholder="Last Name"
               value={ values.lastName }
               className="register-input"
@@ -125,7 +145,7 @@ function Register({ toggle }) {
             />
             <select
               className="register-input"
-              style={{ width: "75px", paddingLeft: "2px"}}
+              style={{ width: "116px", height: "29px", paddingLeft: "2px" }}
               placeholder="Gender"
               value={ values.gender }
               name="gender"
@@ -134,6 +154,18 @@ function Register({ toggle }) {
               <option value="" disabled selected>Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
+            </select>
+            <select
+              className="register-input"
+              style={{ width: "111px", height: "29px", paddingLeft: "2px" }}
+              placeholder="Active?"
+              value={ values.statusActive }
+              name="statusActive"
+              onChange={ handleRegister }
+            >
+              <option value="" disabled selected>Status</option>
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
             </select>
           </div>
             <div
@@ -150,7 +182,13 @@ function Register({ toggle }) {
           <button
             className="send-btn"
             onClick={ () => {
-              role === "doctor" ? handleSendDoctor() : handleSendPatient();
+              if (role === "doctor" && validation) {
+                handleSendDoctor();
+              } else if (role === "patient" && validation) {
+                handleSendPatient();
+              } else {
+                alert("Please, fill correctly all the fields.");
+              }
               clearForm();
               }
             }
