@@ -4,9 +4,9 @@ const db = require('../db/connection');
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  const sqlQueryDoctors = `SELECT * FROM doctors;`;
+  const sqlQueryEmployees = `SELECT * FROM employees;`;
 
-  db.query(sqlQueryDoctors, (err, result) => {
+  db.query(sqlQueryEmployees, (err, result) => {
     if (err) {
       return res.status(500).json({ err: "Internal Server Error" });
     }
@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   const sqlQuery = `
-    SELECT * FROM doctors
+    SELECT * FROM employees
     WHERE id = ?
   `;
 
@@ -32,7 +32,7 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   const { first_name, last_name, age, gender } = req.body;
   const sqlQuery = `
-    INSERT INTO doctors (first_name, last_name, age, gender)
+    INSERT INTO employees (first_name, last_name, age, gender)
     VALUES (?, ?, ?, ?)`;
 
   db.query(sqlQuery, [first_name, last_name, age, gender], (err, result) => {
@@ -47,7 +47,7 @@ router.put("/edit/:id", (req, res) => {
   const { id } = req.params;
   const { first_name, last_name, age, gender } = req.body;
   const sqlQuery = `
-    UPDATE doctors
+    UPDATE employees
     SET first_name = ?, last_name = ?, age = ?, gender = ?
     WHERE id = ?
   `;
@@ -62,7 +62,7 @@ router.put("/edit/:id", (req, res) => {
 
 router.delete("/delete/:id", (req, res) => {
   const { id } = req.params;
-  const sqlQuery = "DELETE FROM doctors WHERE id = ?";
+  const sqlQuery = "DELETE FROM employees WHERE id = ?";
 
   db.query(sqlQuery, [id], (err, result) => {
     if (err) {

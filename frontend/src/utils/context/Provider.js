@@ -19,6 +19,8 @@ const Provider = ({ children }) => {
   }, []);
 
   const {
+    handleDate,
+    handleAge,
     handlePhotoSelect,
     role,
     setRole,
@@ -59,12 +61,14 @@ const Provider = ({ children }) => {
     api: {
       apiData: {
         patients: apiData.patients,
-        doctors: apiData.doctors,
+        employees: apiData.employees,
         // sectors: apiData.sectors,
       },
       setApiData,
     },
     hooks: {
+      handleDate,
+      handleAge,
       handlePhotoSelect,
       role,
       setRole,

@@ -8,6 +8,8 @@ export default function Card({ person }) {
   const { hooks } = useContext(GlobalContext);
   
   const {
+    handleAge,
+    handleDate,
     role,
     showDeletePopup,
     showEditPopup,
@@ -41,7 +43,7 @@ export default function Card({ person }) {
             />
           </div>
           <h3>{ person.first_name } { person.last_name }</h3>
-          <p>Age: {person.age}</p>
+          <p>Age: { handleAge(person.birth_date) }</p>
           <p style={ { color: person.gender === 'Male' ? 'blue' : 'rgb(255, 0, 255)' } }>
             Gender: <strong>{person.gender}</strong>
           </p>

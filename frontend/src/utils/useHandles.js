@@ -7,8 +7,10 @@ const useHandles = () => {
   const initialState = {
     firstName: "",
     lastName: "",
-    age: "",
+    birthDate: "",
     gender: "",
+    statusActive: "",
+    document: "",
   };
   const [values, setValues] = useState(initialState);
   const [deletePopup, setDeletePopup] = useState(false);
@@ -34,9 +36,9 @@ const useHandles = () => {
 
   const handleLogin = async (user) => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/lists`);
+      const response = await axios.get(`http://localhost:3001/db_users`);
       const { data } = response;
-      const userIndex = data.system_users.find(
+      const userIndex = data.find(
         userData => userData.user === user.user && userData.password === user.password
       );
       if (userIndex) {
@@ -84,23 +86,42 @@ const useHandles = () => {
     }))
   };
 
-  const handleSendPatient = () => {
-    axios.post("http://localhost:3001/api/patients", {
-      first_name: values.firstName,
-      last_name: values.lastName,
-      age: values.age,
-      gender: values.gender,
-    }).then((response) => {
-      console.log(response);
-    });
+  const handleSendPatient = (req, res) => {
+    try {
+      axios.post("http://localhost:3001/api/lists/patients", {
+        first_name: values.firstName,
+        last_name: values.lastName,
+        birth_date: values.birthDate,
+        gender: values.gender,
+        status_active: values.statusActive,
+        document: values.document,
+      }).then((response) => {
+        console.log(response);
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+
+    // axios.post("http://localhost:3001/api/lists/patients", {
+    //   first_name: values.firstName,
+    //   last_name: values.lastName,
+    //   birth_date: values.birthDate,
+    //   gender: values.gender,
+    //   status_active: values.statusActive,
+    //   document: values.document,
+    // }).then((response) => {
+    //   console.log(response);
+    // });
   };
 
   const handleSendDoctor = () => {
-    axios.post("http://localhost:3001/api/doctors", {
+    axios.post("http://localhost:3001/api/lists/employees", {
       first_name: values.firstName,
       last_name: values.lastName,
-      age: values.age,
+      birth_date: values.birthDate,
       gender: values.gender,
+      status_active: values.statusActive,
+      document: values.document,
     }).then((response) => {
       console.log(response);
     });
@@ -109,7 +130,7 @@ const useHandles = () => {
   const handleEdit = (id, editedPatient, entityType) => {
     const entity = entityType === "patients" ? "patients" : "doctors";
 
-    axios.put(`http://localhost:3001/api/${entity}/edit/${id}`, editedPatient)
+    axios.put(`http://localhost:3001/api/lists/${entity}/edit/${id}`, editedPatient)
       .then((response) => {
         console.log(response.data);
       })
@@ -121,7 +142,7 @@ const useHandles = () => {
   const handleDelete = (id, entityType) => {
     const entity = entityType === "patients" ? "patients" : "doctors";
 
-    axios.delete(`http://localhost:3001/api/${entity}/delete/${id}`)
+    axios.delete(`http://localhost:3001/api/lists/${entity}/delete/${id}`)
       .then((response) => {
         console.log(response.data);
       })
@@ -144,7 +165,30 @@ const useHandles = () => {
     }
   };
 
+  const handleAge = (birth_date) => {
+    const birthDate = new Date(birth_date);
+    const birthMonth = birthDate.getMonth();
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+
+    const age = currentDate.getFullYear() - birthDate.getFullYear()
+    if (
+      currentMonth < birthMonth
+      || currentMonth === birthMonth
+      && currentDate.getDate() < birthDate.getDate()
+    ) {
+      return age - 1;
+    }
+  };
+
+  const handleDate = (date) => {
+    const formattedDate = new Date(date).toISOString().split('T')[0];
+    return formattedDate;
+  };
+
   return {
+    handleDate,
+    handleAge,
     handlePhotoSelect,
     role,
     setRole,
